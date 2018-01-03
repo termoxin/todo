@@ -2,10 +2,6 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 
-const style = {
-  margin: 12,
-};
-
 class Button extends React.Component {
 	constructor(props) {
 		super(props)
@@ -40,7 +36,7 @@ class Button extends React.Component {
 					label="Add" 
 					onClick={this.handleClick} 
 					primary={true} 
-					style={style} 
+					className="button" 
 				/>
 				<Dialog
 		          title="You did not enter the title of the note, or the note is very short."

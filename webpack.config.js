@@ -30,8 +30,8 @@ module.exports = {
         ]
     },
     plugins: [
-        // new webpack.optimize.UglifyJsPlugin(),
-        // new ExtractTextPlugin("styles.css"),
+        new webpack.optimize.UglifyJsPlugin(),
+        new ExtractTextPlugin("style.css"),
         new HtmlWebpackPlugin({
             title: 'App',
             template: path.join(__dirname, 'src', 'assets', 'template.html'),

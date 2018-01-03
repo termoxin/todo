@@ -20,9 +20,7 @@ class TodoList extends Component {
 		}
 	}
 	render() {
-		let style = {
-				textDecoration: 'line-through'
-			}
+		let style = {textDecoration: 'line-through'}
 		let visible = this.props.todos.map((todo,index) => (
 			    	<div>
 				    	<ListItem 
@@ -32,10 +30,10 @@ class TodoList extends Component {
 					    	style={todo.completed ? style : null}
 				    	/> 
 				    	{this.handleEdit(todo.isEdit, todo.text, todo.id)}
-				    	<FloatingActionButton style={{marginLeft: 10}} secondary={true} mini={true}>
+				    	<FloatingActionButton className="control-button" secondary={true} mini={true}>
 							<ContentRemove onClick={() => {this.props.delete(todo.id)}}/>
 						</FloatingActionButton>
-						<FloatingActionButton style={{marginLeft: 10}} mini={true}>
+						<FloatingActionButton class="control-button" mini={true}>
 							<ContentEdit onClick={() => {this.props.edit(todo.id)}} />
 						</FloatingActionButton>
 			    	</div>

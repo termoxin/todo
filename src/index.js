@@ -4,12 +4,13 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import allReducers from './reducers/index'
 import App from './containers/App'
+import style from './assets/style.css'
 
 const store = createStore(allReducers);
 
 ReactDOM.render(
 	<Provider store={store}>
-		<App />
+		<App style={style} />
 	</Provider>,
 	document.getElementById('root')
 );

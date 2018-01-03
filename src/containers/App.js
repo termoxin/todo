@@ -12,21 +12,11 @@ import { applyEditingTodo } from '../actions/applyEditingTodo'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import IconButton from 'material-ui/IconButton';
 
-const style = {
-	width: '100%',
-	height: '100%',
-	display: 'flex',
-	justifyContent: 'center',
-	flexDirection: 'column',
-	alignItems: 'center',
-	textAlign: 'center'
-}
-
 class App extends Component {
 	render() {
 		let {onAddTodo, onTodoComplete, todos, onDeleteTodo, onEditTodo, onapplyEditingTodo} = this.props;
 		return(
-			<div style={style}>
+			<div className="container">
 				<div>
 					<MuiThemeProvider>
 						<Input add={onAddTodo}/>
