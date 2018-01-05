@@ -1,17 +1,23 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import Dialog from 'material-ui/Dialog';
+import RaisedButton from 'material-ui/RaisedButton'
+import Dialog from 'material-ui/Dialog'
+import TextField from 'material-ui/TextField';
+import { readUserData } from '../assets/firebase'
+import firebase from 'firebase'
 
 class Button extends React.Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			open: false
+			open: false,
+			login: false,
+			user: null
 		}
 
 		this.handleClick = this.handleClick.bind(this)
 		this.handleClose = this.handleClose.bind(this)
+		this.handleAddUser = this.handleAddUser.bind(this)
 	}
 	handleClick(e) {
 		if(!inputAdd.value.trim() || inputAdd.value.length < 6) {
@@ -20,7 +26,7 @@ class Button extends React.Component {
 			});
 		} else {
 			let value = inputAdd.value;
-			this.props.add(value);
+			this.props.add(value, this.state.user);
 			inputAdd.value = '';
 		}
 	}
@@ -28,6 +34,30 @@ class Button extends React.Component {
 		this.setState({
 			open: false
 		});
+	}
+	handleAddUser(e) {
+		let name = e.target.value;
+
+		if(e.keyCode === 13) {
+
+			this.setState({
+				login: true,
+				user: name
+			})
+
+			readUserData(name, function(data){
+				this.props.addUser(this.state.user, data)
+			});
+
+
+		}
+	}
+	componentDidMount() {
+		setInterval(() => {
+			firebase.database().ref(`/users/${this.state.user}`).once('value').then((snaptshot) => {
+        		this.props.loadTodo(snaptshot.val())
+   			});
+   		},1000)
 	}
 	render() {
 		return(
@@ -44,6 +74,20 @@ class Button extends React.Component {
 		          open={this.state.open}
 		          onRequestClose={this.handleClose}
 		        />
+		        <div>
+			        <Dialog
+			          title="Sign in to your account."
+			          modal={true}
+			          open={!this.state.login}
+			          onRequestClose={this.handleClose}
+			        >
+			          Enter your name
+			          <TextField
+					      id="text-field-login"
+					      onKeyUp={this.handleAddUser}
+					   /><br />
+			        </Dialog>
+		      </div>
 			</div>
 		);
 	}

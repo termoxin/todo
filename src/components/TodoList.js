@@ -24,7 +24,7 @@ class TodoList extends Component {
 		let visible = this.props.todos.map((todo,index) => (
 			    	<div>
 				    	<ListItem 
-					    	key={todo.id} 
+					    	key={todo.index} 
 					    	primaryText={todo.text} 
 					    	onClick={() => {this.props.onTodoCompleted(todo.id) }}
 					    	style={todo.completed ? style : null}
@@ -33,7 +33,7 @@ class TodoList extends Component {
 				    	<FloatingActionButton className="control-button" secondary={true} mini={true}>
 							<ContentRemove onClick={() => {this.props.delete(todo.id)}}/>
 						</FloatingActionButton>
-						<FloatingActionButton class="control-button" mini={true}>
+						<FloatingActionButton className="control-button" mini={true}>
 							<ContentEdit onClick={() => {this.props.edit(todo.id)}} />
 						</FloatingActionButton>
 			    	</div>

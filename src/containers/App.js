@@ -9,20 +9,37 @@ import { toggleTodo } from '../actions/toggleTodo'
 import { deleteTodo } from '../actions/deleteTodo'
 import { editTodo } from '../actions/editTodo'
 import { applyEditingTodo } from '../actions/applyEditingTodo'
+import { addUser } from '../actions/addUser'
+import { loadTodo } from '../actions/loadTodo'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import IconButton from 'material-ui/IconButton';
+import IconButton from 'material-ui/IconButton'
+import { Route, Link } from 'react-router-dom'
+import Enter from '../components/Enter'
 
 class App extends Component {
+	constructor(props) {
+		super(props)
+	}
 	render() {
-		let {onAddTodo, onTodoComplete, todos, onDeleteTodo, onEditTodo, onapplyEditingTodo} = this.props;
 		return(
-			<div className="container">
+			<div className="app">
+				{this.containerShow()}
+			</div>
+		);
+	}
+	containerShow() {
+		let {onAddTodo, onTodoComplete, todos, onDeleteTodo, onEditTodo, onapplyEditingTodo, onaddUser, onloadTodo} = this.props;
+		return <div className="container">
 				<div>
 					<MuiThemeProvider>
 						<Input add={onAddTodo}/>
 					</MuiThemeProvider>
 					<MuiThemeProvider>
-						<Button add={onAddTodo} />
+						<Button 
+							add={onAddTodo} 
+							addUser={onaddUser} 
+							loadTodo={onloadTodo}
+						/>
 					</MuiThemeProvider>
 				</div>
 				<MuiThemeProvider>
@@ -34,9 +51,7 @@ class App extends Component {
 						applyEditing={onapplyEditingTodo}
 					/>
 				</MuiThemeProvider>
-
 			</div>
-		);
 	}
 }
 
@@ -48,11 +63,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onAddTodo: text => dispatch(addTodoAction(text)),
+		onAddTodo: (text,name) => dispatch(addTodoAction(text,name)),
 		onTodoComplete: id => dispatch(toggleTodo(id)),
 		onDeleteTodo: id => dispatch(deleteTodo(id)),
 		onEditTodo: id => dispatch(editTodo(id)),
-		onapplyEditingTodo: (text,id) => dispatch(applyEditingTodo(text, id))
+		onapplyEditingTodo: (text,id) => dispatch(applyEditingTodo(text, id)),
+		onaddUser: (name) => dispatch(addUser(name)),
+		onloadTodo: (todos) => dispatch(loadTodo(todos))
 	}
 }
 

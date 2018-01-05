@@ -1,15 +1,8 @@
 const todos = (state = [], action) => {
 	switch(action.type) {
 		case 'ADD_TODO':
-			return [
-				...state,
-				{
-					id: action.id,
-					text: action.text,
-					completed: false,
-					isEdit: false
-				}
-			]
+		console.log(action.todo)
+			return state
 		case 'TOGGLE_TODO':
 			return state.map(todo => 
 				(todo.id === action.id)
@@ -33,6 +26,11 @@ const todos = (state = [], action) => {
 				? {...todo, text: action.text, isEdit: false}
 				: todo
 		)
+		case 'ADD_USER':
+			return state
+
+		case 'LOAD_TODO':
+			return action.todos.data.todos
 
 		default: 
 			return state
