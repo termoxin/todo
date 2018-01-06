@@ -3,9 +3,12 @@ import * as firebase from 'firebase'
 let nextId = 0;
 
 function addTodo(text,name) {
-	firebase.database().ref(`/users/${name}/data/todos/` + nextId++).set({
+	++nextId
+	firebase.database().ref(`/users/${name}/data/todos/` + nextId).set({
 		id: nextId,
-		text
+		text,
+		completed: false,
+		name
 	});
 }
 

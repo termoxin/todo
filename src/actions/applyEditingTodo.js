@@ -1,9 +1,22 @@
+import * as firebase from 'firebase'
 
+function editingTodo(text, id, name) {
+	let updates = {};
 
-export const applyEditingTodo = (text,id) => {
+	updates[`/users/${name}/data/todos/` + id] = {
+		completed: false,
+		id,
+		name,
+		text
+	}
+	console.log(name)
+
+	firebase.database().ref().update(updates);
+}
+
+export const applyEditingTodo = (text,id, name) => {
 	return {
 		type: 'APPLY_EDITING_TODO',
-		text,
-		id
+		todo: editingTodo(text, id, name)
 	}
 }

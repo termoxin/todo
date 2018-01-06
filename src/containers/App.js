@@ -7,7 +7,6 @@ import Button from '../components/Button'
 import { addTodoAction } from '../actions/addTodo'
 import { toggleTodo } from '../actions/toggleTodo'
 import { deleteTodo } from '../actions/deleteTodo'
-import { editTodo } from '../actions/editTodo'
 import { applyEditingTodo } from '../actions/applyEditingTodo'
 import { addUser } from '../actions/addUser'
 import { loadTodo } from '../actions/loadTodo'
@@ -19,6 +18,8 @@ import Enter from '../components/Enter'
 class App extends Component {
 	constructor(props) {
 		super(props)
+
+		this.containerShow = this.containerShow.bind(this)
 	}
 	render() {
 		return(
@@ -28,7 +29,16 @@ class App extends Component {
 		);
 	}
 	containerShow() {
-		let {onAddTodo, onTodoComplete, todos, onDeleteTodo, onEditTodo, onapplyEditingTodo, onaddUser, onloadTodo} = this.props;
+		let {
+				onAddTodo, 
+				onTodoComplete, 
+				todos, 
+				onDeleteTodo, 
+				onapplyEditingTodo, 
+				onaddUser, 
+				onloadTodo,
+				store
+			} = this.props;
 		return <div className="container">
 				<div>
 					<MuiThemeProvider>
@@ -47,8 +57,8 @@ class App extends Component {
 						todos={todos} 
 						onTodoCompleted={onTodoComplete} 
 						delete={onDeleteTodo}
-						edit={onEditTodo}
 						applyEditing={onapplyEditingTodo}
+						store={store}
 					/>
 				</MuiThemeProvider>
 			</div>
@@ -66,8 +76,7 @@ const mapDispatchToProps = (dispatch) => {
 		onAddTodo: (text,name) => dispatch(addTodoAction(text,name)),
 		onTodoComplete: id => dispatch(toggleTodo(id)),
 		onDeleteTodo: id => dispatch(deleteTodo(id)),
-		onEditTodo: id => dispatch(editTodo(id)),
-		onapplyEditingTodo: (text,id) => dispatch(applyEditingTodo(text, id)),
+		onapplyEditingTodo: (text, id, name) => dispatch(applyEditingTodo(text, id, name)),
 		onaddUser: (name) => dispatch(addUser(name)),
 		onloadTodo: (todos) => dispatch(loadTodo(todos))
 	}

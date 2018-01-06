@@ -21,11 +21,8 @@ const todos = (state = [], action) => {
 				: todo
 		)
 		case 'APPLY_EDITING_TODO': 
-			return state.map(todo =>
-				(todo.id === action.id)
-				? {...todo, text: action.text, isEdit: false}
-				: todo
-		)
+			return state
+			
 		case 'ADD_USER':
 			return state
 
