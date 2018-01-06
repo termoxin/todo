@@ -57,7 +57,7 @@ class Button extends React.Component {
 			firebase.database().ref(`/users/${this.state.user}`).once('value').then((snaptshot) => {
         		this.props.loadTodo(snaptshot.val())
    			});
-   		},1000)
+   		},1500)
 	}
 	render() {
 		return(

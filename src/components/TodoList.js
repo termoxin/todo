@@ -38,12 +38,12 @@ class TodoList extends Component {
 				    	<ListItem 
 					    	key={todo.index} 
 					    	primaryText={todo.text} 
-					    	onClick={() => {this.props.onTodoCompleted(todo.id) }}
+					    	onClick={() => {this.props.onTodoCompleted(todo.id, todo.name, todo.completed, todo.text) }}
 					    	style={todo.completed ? style : null}
 				    	/> 
 				    	{this.handleEdit(this.state.isEditing, todo.text, todo.id)}
 				    	<FloatingActionButton className="control-button" secondary={true} mini={true}>
-							<ContentRemove onClick={() => {this.props.delete(todo.id)}}/>
+							<ContentRemove onClick={() => {this.props.delete(todo.id, todo.name)}}/>
 						</FloatingActionButton>
 						<FloatingActionButton className="control-button" mini={true}>
 							<ContentEdit onClick={() => {

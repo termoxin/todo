@@ -9,7 +9,6 @@ function editingTodo(text, id, name) {
 		name,
 		text
 	}
-	console.log(name)
 
 	firebase.database().ref().update(updates);
 }

@@ -74,8 +74,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onAddTodo: (text,name) => dispatch(addTodoAction(text,name)),
-		onTodoComplete: id => dispatch(toggleTodo(id)),
-		onDeleteTodo: id => dispatch(deleteTodo(id)),
+		onTodoComplete: (id, name, status, text) => dispatch(toggleTodo(id, name, status, text)),
+		onDeleteTodo: (id,name) => dispatch(deleteTodo(id, name)),
 		onapplyEditingTodo: (text, id, name) => dispatch(applyEditingTodo(text, id, name)),
 		onaddUser: (name) => dispatch(addUser(name)),
 		onloadTodo: (todos) => dispatch(loadTodo(todos))
